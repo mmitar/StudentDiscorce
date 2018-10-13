@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd       
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+   <context:component-scan base-package="com.app" />
+   <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
+   <mvc:annotation-driven />
+   
+  	<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+ 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/layouts/layouts.xml</value>
+				<value>/WEB-INF/layouts/views.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Dependency Injection -->
+	
+	<!-- Controllers -->
+	<bean id="loginController" class="com.app.controller.LoginController">
+		<property name="userService" ref="userService"/> 
+	</bean>
+	
+	<bean id="registerController" class="com.app.controller.RegisterController">
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+	<bean id="classController" class="com.app.controller.ClassController">
+		<property name="classService" ref="classService"/>
+	</bean>
+	
+	<!-- Business Services -->
+	<bean id="userService" class="com.app.business.UserBusinessService"
+			init-method="init" 
+			destroy-method="destroy"
+			scope="session">
+			
+			<aop:scoped-proxy proxy-target-class="false" />
+	</bean>
+	<bean id="classService" class="com.app.business.ClassBusinessService"
+			init-method="init" 
+			destroy-method="destroy"
+			scope="request">
+			
+			<aop:scoped-proxy proxy-target-class="false" />
+	</bean>
+ </beans>
