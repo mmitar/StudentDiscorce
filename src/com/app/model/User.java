@@ -5,11 +5,13 @@ import java.sql.ResultSet;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+
 @Component
-@Scope(value="session")
+@Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class User 
 {
 	@NotNull(message="Username cannot be null.")

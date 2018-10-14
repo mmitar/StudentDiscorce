@@ -2,6 +2,7 @@ package com.app.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.app.business.CourseBusinessInterface;
 import com.app.business.UserBusinessInterface;
 import com.app.model.User;
 
@@ -16,12 +18,21 @@ import com.app.model.User;
 @RequestMapping("/login")
 public class LoginController 
 {
-	private UserBusinessInterface service;
+	private UserBusinessInterface userService;
+	private CourseBusinessInterface courseService;
 	
-	public void setUserService(UserBusinessInterface service)
+	@Autowired
+	public void setUserService(UserBusinessInterface userService)
 	{
-		this.service = service;
+		this.userService = userService;
 	}
+	
+	@Autowired
+	public void setCourseService(CourseBusinessInterface courseService)
+	{
+		this.courseService = courseService;
+	}
+	
 	
 	/**
 	 * displayForm
@@ -32,7 +43,7 @@ public class LoginController
 	@RequestMapping(path="/user", method=RequestMethod.GET)
 	public ModelAndView displayForm()
 	{
-		return new ModelAndView("loginUser", "user", new User("", "", "", "", "", "", ""));
+		return new ModelAndView("loginUser", "user", new User());
 	}
 	
 	/**
@@ -54,9 +65,13 @@ public class LoginController
 			return new ModelAndView("loginUser", "user", user);
 		}
 		
-		service.test();
+		userService.test();
+		courseService.test();
 		
-		return new ModelAndView("dashboard", "user", user);
+		ModelAndView mv = new ModelAndView("dashboard");
+		mv.addObject("user", user);
+		mv.addObject("courses", courseService.getCourses());
+		return mv;
 	}
 	
 	/**

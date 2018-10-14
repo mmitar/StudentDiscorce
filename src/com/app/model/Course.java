@@ -1,12 +1,11 @@
 package com.app.model;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Class 
+public class Course 
 {
-	private String course;
+	private String id;
 	private String title;
 	private String description;
 	private String major;
@@ -18,9 +17,9 @@ public class Class
 	private List<User> students;
 	private String image;
 
-	public Class() 
+	public Course() 
 	{
-		course = "";
+		id = "";
 		title = "";
 		description = "";
 		major = "";
@@ -33,10 +32,10 @@ public class Class
 		image = null;
 	}
 
-	public Class(String course, String title, String description, String major, String classLocation, String classTimes,
+	public Course(String id, String title, String description, String major, String classLocation, String classTimes,
 			String tutorTimes, List<User> instructors, List<User> tutors, List<User> students, String image) {
 		super();
-		this.course = course;
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.major = major;
@@ -49,12 +48,12 @@ public class Class
 		this.image = image;
 	}
 
-	public String getCourse() {
-		return course;
+	public String getId() {
+		return id;
 	}
 
-	public void setCourse(String course) {
-		this.course = course;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -139,7 +138,7 @@ public class Class
 
 	@Override
 	public String toString() {
-		return "Class [course=" + course + ", title=" + title + ", description=" + description + ", major=" + major
+		return "Class [id=" + id + ", title=" + title + ", description=" + description + ", major=" + major
 				+ ", classLocation=" + classLocation + ", classTimes=" + classTimes + ", tutorTimes=" + tutorTimes
 				+ ", instructors=" + instructors + ", tutors=" + tutors + ", students=" + students
 				+ "]";

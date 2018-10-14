@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 
 <body>
+
 	<h2>Login as an Existing User</h2>
 	<br/>
 	<form:form method="POST" modelAttribute="user" action="../login/validateUser">

@@ -1,56 +1,69 @@
 package com.app.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.app.model.Class;
+import javax.inject.Inject;
 
-public class ClassBusinessService implements ClassBusinessInterface
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.app.model.Course;
+
+public class CourseBusinessService implements CourseBusinessInterface
 {
-	UserBusinessInterface service;
-
-	List<Class> classes;
+//	UserBusinessService service;
 	
-	public ClassBusinessService() 
+	List<Course> courses = new ArrayList<Course>();
+	
+	public CourseBusinessService() 
 	{
-		classes.add(new Class("CST-341",
+		courses.add(new Course("CST-341",
 				"Open Source Computing",
 				"Develop a Spring Application",
 				"Software Development",
 				"16-104",
 				"1:00-2:45pm||Tu,We,Th",
 				"3:00-5:00pm||Tu,We,Th",
-				service.getInstructors(),service.getTutors(),service.getStudents(),
+//				service.getInstructors(),service.getTutors(),service.getStudents(),
+				null,null,null,
 				"https://www.csuci.edu/img/launch-virtual-tour-16x9.jpg"));
-		classes.add(new Class("CST-326",
+		courses.add(new Course("CST-326",
 				"Written and Verbal Communication",
 				"Integrating Team Mangement Skills with Project Development",
 				"Liberal Arts",
 				"4-224",
 				"3:00-4:45pm||Tu,We,Th",
 				"5:00-7:00pm||Tu,We,Th",
-				service.getInstructors(),service.getTutors(),service.getStudents(),
+//				service.getInstructors(),service.getTutors(),service.getStudents(),
+				null,null,null,
 				"https://www.rider.edu/sites/default/files/styles/hero_image_-_no_play_icon/public/featuredimages/111114_campus_112_0.jpg?itok=7hDr78hX"));
-		classes.add(new Class("BUS-352",
+		courses.add(new Course("BUS-352",
 				"Business Statistics",
 				"Calculate, Assume, and Gentrify Economic Anomalies",
 				"Software Development",
 				"20-401",
 				"8:00-9:00pm||Tu,We,Th",
 				"5:00-6:00pm||Tu,We,Th",
-				service.getInstructors(),service.getTutors(),service.getStudents(),
+//				service.getInstructors(),service.getTutors(),service.getStudents(),
+				null,null,null,
 				"https://uwm.edu/wp-content/uploads/2017/07/downer-cluster-900X500.jpg"));
 	}
 	
+	public List<Course> getCourses() 
+	{
+		return courses;
+	}
+	
 	public void init() {
-		System.out.println("init() from ClassBusinessService");
+		System.out.println("init() from CourseBusinessService");
 	}
 	
 	public void destroy() {
-		System.out.println("destroy() from ClassBusinessService");
+		System.out.println("destroy() from CourseBusinessService");
 	}
 	
 	@Override
 	public void test() {
-		System.out.println("Hello from ClassBusinessService.");
+		System.out.println("Hello from CourseBusinessService.");
 	}
 }

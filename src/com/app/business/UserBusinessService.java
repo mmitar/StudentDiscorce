@@ -2,11 +2,12 @@ package com.app.business;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.app.model.User;
 
 public class UserBusinessService implements UserBusinessInterface 
 {
-	List<User> users;
+	List<User> users = new ArrayList<User>();
 	
 	public UserBusinessService() 
 	{

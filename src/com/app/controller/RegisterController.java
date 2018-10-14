@@ -2,6 +2,7 @@ package com.app.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,7 @@ public class RegisterController
 {
 	private UserBusinessInterface service;
 	
+	@Autowired
 	public void setUserService(UserBusinessInterface service)
 	{
 		this.service = service;
@@ -32,7 +34,7 @@ public class RegisterController
 	@RequestMapping(path="/user", method=RequestMethod.GET)
 	public ModelAndView displayForm()
 	{
-		return new ModelAndView("registerUser", "user", new User("", "", "", "", "", "", ""));
+		return new ModelAndView("registerUser", "user", new User());
 	}
 	
 	/**
