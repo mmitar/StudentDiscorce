@@ -57,7 +57,7 @@ public class UserBusinessService implements UserBusinessInterface
 				instructors.add(user);
 			}
 		}
-		
+		System.out.println(instructors);
 		return instructors;
 	}
 	
