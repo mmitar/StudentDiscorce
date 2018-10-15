@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <body>
+	<div class="center--body">
 	<h2>Register as a New User</h2>
 	<br/>
 	<form:form method="POST" modelAttribute="user" action="registerUser">
@@ -48,5 +49,5 @@
 			</tr>
 		</table>
 	</form:form>
-
+</div>
 </body>

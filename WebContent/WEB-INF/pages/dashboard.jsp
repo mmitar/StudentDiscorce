@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <body>
+
+<div class="center--body">
 <h2>Dashboard</h2>
 <br/><br/>
 		<c:choose>
@@ -19,5 +21,5 @@
     </c:otherwise>
 </c:choose>
 			
-		
+		</div>
 </body>

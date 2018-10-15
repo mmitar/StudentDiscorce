@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +14,7 @@ import com.app.model.Course;
 
 @Controller
 @RequestMapping("/course")
-public class CourseController 
+public class CourseController
 {
 	private CourseBusinessInterface service;
 	
@@ -40,6 +42,13 @@ public class CourseController
 	@RequestMapping(path="/courseView", method=RequestMethod.POST)
 	public ModelAndView displayCourse(@ModelAttribute("course")Course course) {
 		
-		return new ModelAndView("courseView", "course", course);
+		System.out.println("init courseview");
+//		System.out.println(course);
+//		System.out.println(course.getId());
+		
+		ModelAndView mv = new ModelAndView("courseView");
+		mv.addObject("course", course);
+		
+		return mv;
 	}
 }

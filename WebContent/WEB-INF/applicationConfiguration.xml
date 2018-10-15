@@ -45,14 +45,14 @@
 	<bean id="userService" class="com.app.business.UserBusinessService"
 			init-method="init" 
 			destroy-method="destroy"
-			scope="request">
+			scope="prototype">
 			
 			<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 	<bean id="courseService" class="com.app.business.CourseBusinessService"
 			init-method="init" 
 			destroy-method="destroy"
-			scope="request">
+			scope="prototype">
 			
 			<aop:scoped-proxy proxy-target-class="false" />
 	</bean>

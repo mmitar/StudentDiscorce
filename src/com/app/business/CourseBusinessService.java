@@ -49,6 +49,12 @@ public class CourseBusinessService implements CourseBusinessInterface
 				"https://uwm.edu/wp-content/uploads/2017/07/downer-cluster-900X500.jpg"));
 	}
 	
+	public Course oneCourse() {
+	
+		Course one = courses.get(1);
+		return one;
+	}
+	
 	public List<Course> getCourses() 
 	{
 		return courses;

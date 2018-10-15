@@ -3,7 +3,7 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 
 <body>
-
+	<div class="center--body">
 	<h2>Login as an Existing User</h2>
 	<br/>
 	<form:form method="POST" modelAttribute="user" action="../login/validateUser">
@@ -26,5 +26,5 @@
 			</tr>
 		</table>
 	</form:form>
-
+	</div>
 </body>

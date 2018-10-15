@@ -1,5 +1,5 @@
 <body>
-
+	<div class="center--body">
 	<h2>Search a Class</h2>
 	
 	
@@ -18,4 +18,5 @@
 		<a>CST-235: Frameworking the MVC</a>
 		<a>CST-101: Where the remote go?</a>
 	</ul>
+	</div>
 </body>

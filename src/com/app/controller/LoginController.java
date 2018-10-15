@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.app.business.CourseBusinessInterface;
 import com.app.business.UserBusinessInterface;
+import com.app.model.Course;
 import com.app.model.User;
 
 @Controller
@@ -57,7 +58,7 @@ public class LoginController
 	 * @return ModelAndView dashboard, user
 	 */
 	@RequestMapping(path="/validateUser", method=RequestMethod.POST)
-	public ModelAndView loginUser(@Valid @ModelAttribute("user")User user, BindingResult result)
+	public ModelAndView loginUser(@Valid @ModelAttribute("user")User user, @ModelAttribute("course")Course course, BindingResult result)
 	{
 		//Validate the form
 		if(result.hasErrors())
@@ -67,10 +68,13 @@ public class LoginController
 		
 		userService.test();
 		courseService.test();
+		System.out.println(courseService.getCourses());
 		
 		ModelAndView mv = new ModelAndView("dashboard");
 		mv.addObject("user", user);
 		mv.addObject("courses", courseService.getCourses());
+		mv.addObject("course", course);
+		
 		return mv;
 	}
 	
