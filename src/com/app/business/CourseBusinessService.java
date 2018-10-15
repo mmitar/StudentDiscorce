@@ -3,16 +3,11 @@ package com.app.business;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.app.model.Course;
 
 public class CourseBusinessService implements CourseBusinessInterface
 {
-//	UserBusinessService service;
-	
+	UserBusinessService service = new UserBusinessService();
 	List<Course> courses = new ArrayList<Course>();
 	
 	public CourseBusinessService() 
@@ -24,8 +19,7 @@ public class CourseBusinessService implements CourseBusinessInterface
 				"16-104",
 				"1:00-2:45pm||Tu,We,Th",
 				"3:00-5:00pm||Tu,We,Th",
-//				service.getInstructors(),service.getTutors(),service.getStudents(),
-				null,null,null,
+				service.getInstructors(),service.getTutors(),service.getStudents(),
 				"https://www.csuci.edu/img/launch-virtual-tour-16x9.jpg"));
 		courses.add(new Course("CST-326",
 				"Written and Verbal Communication",
@@ -34,8 +28,7 @@ public class CourseBusinessService implements CourseBusinessInterface
 				"4-224",
 				"3:00-4:45pm||Tu,We,Th",
 				"5:00-7:00pm||Tu,We,Th",
-//				service.getInstructors(),service.getTutors(),service.getStudents(),
-				null,null,null,
+				service.getInstructors(),service.getTutors(),service.getStudents(),
 				"https://www.rider.edu/sites/default/files/styles/hero_image_-_no_play_icon/public/featuredimages/111114_campus_112_0.jpg?itok=7hDr78hX"));
 		courses.add(new Course("BUS-352",
 				"Business Statistics",
@@ -44,15 +37,19 @@ public class CourseBusinessService implements CourseBusinessInterface
 				"20-401",
 				"8:00-9:00pm||Tu,We,Th",
 				"5:00-6:00pm||Tu,We,Th",
-//				service.getInstructors(),service.getTutors(),service.getStudents(),
-				null,null,null,
+				service.getInstructors(),service.getTutors(),service.getStudents(),
 				"https://uwm.edu/wp-content/uploads/2017/07/downer-cluster-900X500.jpg"));
 	}
 	
-	public Course oneCourse() {
-	
-		Course one = courses.get(1);
-		return one;
+	public Course getCourseById(String id) {
+		
+		for (Course course : courses) {
+			if(course.getId().equals(id))
+			{
+				return course;
+			}
+		}
+		return null;
 	}
 	
 	public List<Course> getCourses() 

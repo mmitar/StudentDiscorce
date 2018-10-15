@@ -179,34 +179,36 @@
 	display: flex;
 	flex-direction: row;
 	flex: 1 100%;
-	background: red;
 }
 
 .course--content {
 	display: flex;
 	flex-direction: column;
     flex-grow: 1;
-    
-	background: blue;
 }
 
 .course--header {
 	
-	
 }
 
 .course--id {
-	
+	padding: 5px;
 }
 
 .course--major {
-	
+	padding: 5px;
+	background: rgba(150,150,150,1);
 }
 
 .course--time {
-	background: brown;
+	padding: 5px;
+	background: rgba(100,100,100,1);
+}
+
+.course--description {
+	padding: 5px;
 }
 
 .course--users {
-	background: purple;
+	padding: 5px;
 }

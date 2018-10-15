@@ -41,10 +41,8 @@ public class CourseController
 	
 	@RequestMapping(path="/courseView", method=RequestMethod.POST)
 	public ModelAndView displayCourse(@ModelAttribute("course")Course course) {
-		
-		System.out.println("init courseview");
-//		System.out.println(course);
-//		System.out.println(course.getId());
+
+		course = service.getCourseById(course.getId());
 		
 		ModelAndView mv = new ModelAndView("courseView");
 		mv.addObject("course", course);
