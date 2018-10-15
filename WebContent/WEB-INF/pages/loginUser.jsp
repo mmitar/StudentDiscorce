@@ -23,6 +23,7 @@
 			<tr>
 				<td><input type="submit" value="Login"/></td>
 				<td><a href="../register/user">Register</a></td>
+				
 			</tr>
 		</table>
 	</form:form>

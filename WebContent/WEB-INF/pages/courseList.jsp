@@ -18,5 +18,8 @@
 		<a>CST-235: Frameworking the MVC</a>
 		<a>CST-101: Where the remote go?</a>
 	</ul>
+	<tr>
+	<td><a href="../course/addCourse">Add Course</a></td>
+	</tr>
 	</div>
 </body>

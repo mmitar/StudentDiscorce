@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.app.business.CourseBusinessInterface;
 import com.app.model.Course;
+import com.app.model.User;
 
 @Controller
 @RequestMapping("/course")
@@ -51,4 +53,23 @@ public class CourseController
 		
 		return mv;
 	}
+	@RequestMapping(path="/addedCourse", method=RequestMethod.POST)
+	public ModelAndView addCourse(@Valid @ModelAttribute("course")Course course, BindingResult result)
+	{		
+		//Validate the form
+		if(result.hasErrors())
+		{
+			return new ModelAndView("addCourse", "course", course);
+		}		
+		service.test();
+		
+		return new ModelAndView("addedCourse", "course", course);
+	}
+	
+	@RequestMapping(path="/addCourse", method=RequestMethod.GET)
+	public ModelAndView displayForm1()
+	{
+		return new ModelAndView("addCourse", "course", new Course());
+	}
+	
 }
