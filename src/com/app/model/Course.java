@@ -3,14 +3,38 @@ package com.app.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
+/**
+ * Course model used in CRUD and displays detailed information about an available course to join as a student.
+ * @author Matt & Joey
+ *
+ */
 public class Course 
 {
-	private String id;
+	@NotNull(message="ID cannot be null.")
+	@Size(min=4, max=30, message="ID must be between 5 and 30 characters.")
+	private String courseID;
+	@NotNull(message="Title cannot be null.")
+	@Size(min=5, max=30, message="Title must be between 5 and 30 characters.")
 	private String title;
+	@NotNull(message="description cannot be null.")
+	@Size(min=5, max=30, message="description must be between 5 and 30 characters.")
 	private String description;
+	@NotNull(message="Major cannot be null.")
+	@Size(min=5, max=30, message="Major must be between 5 and 30 characters.")
 	private String major;
+	@NotNull(message="Class Location cannot be null.")
+	@Size(min=5, max=30, message="Class Location must be between 5 and 30 characters.")
 	private String classLocation;
+	@NotNull(message="Class Times cannot be null.")
+	@Size(min=5, max=30, message="Class Times must be between 5 and 30 characters.")
 	private String classTimes;
+	@NotNull(message="Tutor Times cannot be null.")
+	@Size(min=5, max=30, message="Tutor Times must be between 5 and 30 characters.")
 	private String tutorTimes;
 	private List<User> instructors;
 	private List<User> tutors;
@@ -19,7 +43,7 @@ public class Course
 
 	public Course() 
 	{
-		id = "";
+		courseID = "";
 		title = "";
 		description = "";
 		major = "";
@@ -32,10 +56,10 @@ public class Course
 		image = null;
 	}
 
-	public Course(String id, String title, String description, String major, String classLocation, String classTimes,
+	public Course(String courseID, String title, String description, String major, String classLocation, String classTimes,
 			String tutorTimes, List<User> instructors, List<User> tutors, List<User> students, String image) {
 		super();
-		this.id = id;
+		this.courseID = courseID;
 		this.title = title;
 		this.description = description;
 		this.major = major;
@@ -48,12 +72,12 @@ public class Course
 		this.image = image;
 	}
 
-	public String getId() {
-		return id;
+	public String getCourseID() {
+		return courseID;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setCourseID(String courseID) {
+		this.courseID = courseID;
 	}
 
 	public String getTitle() {
@@ -138,10 +162,52 @@ public class Course
 
 	@Override
 	public String toString() {
-		return "Course [id=" + id + ", title=" + title + ", description=" + description + ", major=" + major
+		return "Course [courseID =" + courseID + ", title=" + title + ", description=" + description + ", major=" + major
 				+ ", classLocation=" + classLocation + ", classTimes=" + classTimes + ", tutorTimes=" + tutorTimes
 				+ ", instructors=" + instructors + ", tutors=" + tutors + ", students=" + students + ", image=" + image
 				+ "]";
 	}
 
+	public static Course getSqlRowSet(SqlRowSet srs)
+	{
+		Course course = new Course(
+				srs.getString("COURSE_ID"),
+				srs.getString("TITLE"),
+				srs.getString("DESCRIPTION"),
+				srs.getString("MAJOR"),
+				srs.getString("CLASS_LOCATION"),
+				srs.getString("CLASS_TIMES"),
+				srs.getString("TUTOR_TIMES"),
+				null,
+				null,
+				null,
+				srs.getString("IMAGE")
+				);
+				
+		return course;
+	}
+	
+	public static String getSqlParams()
+	{
+		return 	  "`COURSE_ID`, "
+				+ "`TITLE`, "
+				+ "`DESCRIPTION`, "
+				+ "`MAJOR`, "
+				+ "`CLASS_LOCATION`, "
+				+ "`CLASS_TIMES`, "
+				+ "`TUTOR_TIMES`, "
+				+ "`IMAGE`";
+	}
+	
+	public static String getSqlValues(Course course)
+	{
+		return  "'" + course.getCourseID() + "', " +
+				"'" + course.getTitle() + "', " +
+				"'" + course.getDescription() + "', " +
+				"'" + course.getMajor() + "', " +
+				"'" + course.getClassLocation() + "', " +
+				"'" + course.getClassTimes() + "', " +
+				"'" + course.getTutorTimes() + "'" +
+				"'" + course.getImage() + "'";
+	}
 }

@@ -26,8 +26,8 @@
 
 <div class="channels">
 	
-	<div class="channel placeholder">CST-341</div>
-	<div class="channel placeholder">HTR-533</div>
+	<div class="channel placeholder"></div>
+	<div class="channel placeholder"></div>
 	<div class="channel placeholder"></div>
 	
 	<div class="channel placeholder"></div>

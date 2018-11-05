@@ -58,22 +58,27 @@ public class LoginController
 	 * @return ModelAndView dashboard, user
 	 */
 	@RequestMapping(path="/validateUser", method=RequestMethod.POST)
-	public ModelAndView loginUser(@Valid @ModelAttribute("user")User user, @ModelAttribute("course")Course course, BindingResult result)
+	public ModelAndView loginUser(@Valid @ModelAttribute("user")User user, BindingResult validate)
 	{
-		//Validate the form
-		if(result.hasErrors())
+		// Validate the form
+		if(validate.hasErrors())
 		{
 			return new ModelAndView("loginUser", "user", user);
 		}
 		
-		userService.test();
-		courseService.test();
-		System.out.println(courseService.getCourses());
+		User verifiedUser = this.userService.findBy(user);
+		
+		if(verifiedUser == null)
+		{
+			ModelAndView mv = new ModelAndView("loginUser");
+			mv.addObject("user", user);
+			mv.addObject("error", "Username or Password is incorrect.");
+			return mv;
+		}
 		
 		ModelAndView mv = new ModelAndView("dashboard");
-		mv.addObject("user", user);
-		mv.addObject("courses", courseService.getCourses());
-		mv.addObject("course", course);
+		mv.addObject("user", verifiedUser);
+		mv.addObject("courses", this.courseService.findAll());
 		
 		return mv;
 	}
@@ -89,6 +94,4 @@ public class LoginController
 	{
 		return "dashboard";
 	}
-	
-	
 }

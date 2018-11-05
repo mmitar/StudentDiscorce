@@ -57,8 +57,10 @@ public class RegisterController
 			return new ModelAndView("registerUser", "user", user);
 		}
 		
+		//Test the UserService Depecency Injection Instance
 		service.test();
 		
+		//Return MAV and user model to login form
 		return new ModelAndView("loginUser", "user", user);
 	}
 	

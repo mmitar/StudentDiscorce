@@ -3,77 +3,52 @@ package com.app.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.data.UserDataService;
 import com.app.model.User;
 
 public class UserBusinessService implements UserBusinessInterface 
 {
+	UserDataService userDAO = new UserDataService();
 	List<User> users = new ArrayList<User>();
 	
 	public UserBusinessService() 
 	{
-		users.add(new User("","","Richard", "Richards", "", "", "0"));
-		users.add(new User("","","Dennis", "Denniss", "", "", "0||1"));
-		users.add(new User("","","Arthor", "Arthors", "", "", "0||1"));
-		users.add(new User("","","James", "Jamess", "", "", "0"));
-		users.add(new User("","","Nathan", "Nathans", "", "", "0"));
-		users.add(new User("","","Emily", "Emilys", "", "", "0"));
-		users.add(new User("","","Liz", "Lizs", "", "", "1"));
-		users.add(new User("","","Tony", "Tonys", "", "", "1"));
-		users.add(new User("","","Mark", "Marks", "", "", "0"));
-		users.add(new User("","","Matthew", "Matthews", "", "", "1"));
-		users.add(new User("","","Devin", "Devins", "", "", "0"));
-		users.add(new User("","","Evan", "Evans", "", "", "0"));
-		users.add(new User("","","Kevin", "Kevins", "", "", "2"));
-		users.add(new User("","","Lenard", "Lenards", "", "", "0"));
-		users.add(new User("","","Michael", "Michaels", "", "", "2||1"));
-		users.add(new User("","","Marge", "Marges", "", "", "0||1"));
-		users.add(new User("","","Shela", "Shelas", "", "", "0"));
-		users.add(new User("","","Sam", "Sams", "", "", "2"));
+		users.add(new User("","","Richard", "Richards", "", "", "CST-341:0"));
+		users.add(new User("","","Dennis", "Denniss", "", "", "CST-341:0||CST-341:1"));
+		users.add(new User("","","Arthor", "Arthors", "", "", "CST-341:0||CST-341:1"));
+		users.add(new User("","","James", "Jamess", "", "", "CST-341:0"));
+		users.add(new User("","","Nathan", "Nathans", "", "", "CST-341:0"));
+		users.add(new User("","","Emily", "Emilys", "", "", "CST-326:0"));
+		users.add(new User("","","Liz", "Lizs", "", "", "CST-326:1"));
+		users.add(new User("","","Tony", "Tonys", "", "", "CST-326:1"));
+		users.add(new User("","","Mark", "Marks", "", "", "CST-326:0"));
+		users.add(new User("","","Matthew", "Matthews", "", "", "CST-326:1"));
+		users.add(new User("","","Devin", "Devins", "", "", "CST-326:0"));
+		users.add(new User("","","Evan", "Evans", "", "", "CST-352:0"));
+		users.add(new User("","","Kevin", "Kevins", "", "", "CST-352:2"));
+		users.add(new User("","","Lenard", "Lenards", "", "", "CST-352:0"));
+		users.add(new User("","","Michael", "Michaels", "", "", "CST-352:2||CST-341:1"));
+		users.add(new User("","","Marge", "Marges", "", "", "CST-341:0||CST-352:1"));
+		users.add(new User("","","Shela", "Shelas", "", "", "CST-341:0"));
+		users.add(new User("","","Sam", "Sams", "", "", "CST-326:2"));
 	}
 	
-	public List<User> getTutors () 
+	public User findBy(User user)
 	{
-		List<User> tutors = new ArrayList<User>();
-		
-		for (User user : this.users)
-		{
-			if(user.getPermission().contains("1"))
-			{
-				tutors.add(user);
-			}
-		}
-		
-		return tutors;
+		return this.userDAO.findBy(user);
 	}
 	
-	public List<User> getInstructors ()
+	public boolean create(User user)
 	{
-		List<User> instructors = new ArrayList<User>();
-		
-		for (User user : this.users)
-		{
-			if(user.getPermission().contains("2"))
-			{
-				instructors.add(user);
-			}
-		}
-		System.out.println(instructors);
-		return instructors;
+		return this.userDAO.create(user);
 	}
 	
-	public List<User> getStudents ()
+	public void addConstructUsers()
 	{
-		List<User> students = new ArrayList<User>();
-		
-		for (User user : this.users) 
+		for(User user : this.users)
 		{
-			if(user.getPermission().contains("0")) 
-			{
-				students.add(user);
-			}
+			this.userDAO.create(user);
 		}
-		
-		return students;
 	}
 	
 	public void init() {

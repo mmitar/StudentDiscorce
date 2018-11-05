@@ -3,11 +3,13 @@ package com.app.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.data.CourseDataService;
 import com.app.model.Course;
 
 public class CourseBusinessService implements CourseBusinessInterface
 {
-	UserBusinessService service = new UserBusinessService();
+	UserBusinessService userService = new UserBusinessService();
+	CourseDataService courseDAO = new CourseDataService();
 	List<Course> courses = new ArrayList<Course>();
 	
 	public CourseBusinessService() 
@@ -19,7 +21,7 @@ public class CourseBusinessService implements CourseBusinessInterface
 				"16-104",
 				"1:00-2:45pm||Tu,We,Th",
 				"3:00-5:00pm||Tu,We,Th",
-				service.getInstructors(),service.getTutors(),service.getStudents(),
+				null,null,null,
 				"https://www.csuci.edu/img/launch-virtual-tour-16x9.jpg"));
 		courses.add(new Course("CST-326",
 				"Written and Verbal Communication",
@@ -28,7 +30,7 @@ public class CourseBusinessService implements CourseBusinessInterface
 				"4-224",
 				"3:00-4:45pm||Tu,We,Th",
 				"5:00-7:00pm||Tu,We,Th",
-				service.getInstructors(),service.getTutors(),service.getStudents(),
+				null,null,null,
 				"https://www.rider.edu/sites/default/files/styles/hero_image_-_no_play_icon/public/featuredimages/111114_campus_112_0.jpg?itok=7hDr78hX"));
 		courses.add(new Course("BUS-352",
 				"Business Statistics",
@@ -37,24 +39,36 @@ public class CourseBusinessService implements CourseBusinessInterface
 				"20-401",
 				"8:00-9:00pm||Tu,We,Th",
 				"5:00-6:00pm||Tu,We,Th",
-				service.getInstructors(),service.getTutors(),service.getStudents(),
+				null,null,null,
 				"https://uwm.edu/wp-content/uploads/2017/07/downer-cluster-900X500.jpg"));
 	}
 	
-	public Course getCourseById(String id) {
-		
-		for (Course course : courses) {
-			if(course.getId().equals(id))
-			{
-				return course;
-			}
-		}
-		return null;
+	public Course findBy(Course course)
+	{
+		return this.courseDAO.findBy(course);
 	}
 	
-	public List<Course> getCourses() 
+	public List<Course> findAll(Course course)
 	{
-		return courses;
+		return this.courseDAO.findAll(course);
+	}
+	
+	public List<Course> findAll()
+	{
+		return this.courseDAO.findAll();
+	}
+	
+	public boolean createCourse(Course course) 
+	{
+		return this.courseDAO.create(course);
+	}
+	
+	public void addConstructCourses() 
+	{
+		for(Course course : this.courses)
+		{
+			this.courseDAO.create(course);
+		}
 	}
 	
 	public void init() {

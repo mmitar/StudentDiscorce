@@ -6,10 +6,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * User Class with informative attributes to destinguish users from each other and validate their accounts.
+ * @author Matt & Joey
+ *
+ */
 @Component
 @Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class User 
@@ -117,15 +122,45 @@ public class User
 		this.permission = permission;
 	}
 
-	public static User getResultSet(ResultSet rs)
-	{
-		
-		return null;
-	}
-
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", email=" + email + ", phone=" + phone + ", permission=" + permission + "]";
+	}
+	
+	public static User getSqlRowSet(SqlRowSet srs)
+	{
+		User user = new User(
+				srs.getString("USERNAME"),
+				srs.getString("PASSWORD"),
+				srs.getString("FIRSTNAME"),
+				srs.getString("LASTNAME"),
+				srs.getString("EMAIL"),
+				srs.getString("PHONE"),
+				srs.getString("PERMISSION")
+				);
+		return user;
+	}
+	
+	public static String getSqlParams()
+	{
+		return 	  "`USERNAME`, "
+				+ "`PASSWORD`, "
+				+ "`FIRSTNAME`, "
+				+ "`LASTNAME`, "
+				+ "`EMAIL`, "
+				+ "`PHONE`, "
+				+ "`PERMISSION`";
+	}
+	
+	public static String getSqlValues(User user)
+	{
+		return  "'" + user.getUsername() + "', " +
+				"'" + user.getPassword() + "', " +
+				"'" + user.getFirstName() + "', " +
+				"'" + user.getLastName() + "', " +
+				"'" + user.getEmail() + "', " +
+				"'" + user.getPhone() + "', " +
+				"'" + user.getPermission() + "'";
 	}
 }

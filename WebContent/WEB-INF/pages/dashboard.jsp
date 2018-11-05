@@ -21,5 +21,9 @@
     </c:otherwise>
 </c:choose>
 			
+			<tr>
+			<td><a href="../course/addCourse">Add Course</a></td>
+			</tr>
+			
 		</div>
 </body>
