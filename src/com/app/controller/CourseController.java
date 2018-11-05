@@ -17,13 +17,11 @@ import com.app.model.Course;
 @RequestMapping("/course")
 public class CourseController
 {
-	private CourseBusinessInterface courseService;
-	
+	/**
+	 * Dependency Injected
+	 */
 	@Autowired
-	public void setCourseService(CourseBusinessInterface service)
-	{
-		this.courseService = service;
-	}
+	private CourseBusinessInterface courseService;
 	
 	/**
 	 * displayForm
@@ -50,7 +48,7 @@ public class CourseController
 	@RequestMapping(path="/courseView", method=RequestMethod.POST)
 	public ModelAndView displayCourse(@ModelAttribute("course")Course course) {
 
-		// Connects to the CourseBusinessService to get Class by ID
+		// Connects to the CourseBusinessService to get Course by ID
 		course = courseService.findBy(course);
 		
 		// Construct MAV
@@ -63,7 +61,7 @@ public class CourseController
 	/**
 	 * addCourse
 	 * Checks the validation of course in the addCourse form. 
-	 * Navs to success page if the model is valid
+	 * Navs to the course view page if the model is valid and original
 	 * 
 	 * @param course
 	 * @param result
@@ -75,19 +73,24 @@ public class CourseController
 		// Validate the form
 		if(validate.hasErrors())
 		{
+			// Return Previous MAV
 			return new ModelAndView("addCourse", "course", course);
 		}
 		
+		// Calls CourseBusinessService.createCourse() to add new Course
 		boolean result = courseService.createCourse(course);
 		
+		// Verifies if creating a course worked. If false, course already exists.
 		if(result == false) 
 		{
+			// Return Previous MAV w/ Error
 			ModelAndView mv = new ModelAndView("addCourse");
 			mv.addObject("course", course);
 			mv.addObject("error", "Course ID already exists.");
 			return mv;
 		}
 		
+		// Forward user to the course View of new class.
 		return new ModelAndView("courseView", "course", course);
 	}
 	

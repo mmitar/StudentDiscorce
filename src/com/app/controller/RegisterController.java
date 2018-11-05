@@ -17,13 +17,11 @@ import com.app.model.User;
 @RequestMapping("/register")
 public class RegisterController 
 {
-	private UserBusinessInterface service;
-	
+	/**
+	 * Dependency Injected
+	 */
 	@Autowired
-	public void setUserService(UserBusinessInterface service)
-	{
-		this.service = service;
-	}
+	private UserBusinessInterface userService;
 	
 	/**
 	 * displayForm
@@ -48,19 +46,27 @@ public class RegisterController
 	 * @return ModelAndView Login, user
 	 */
 	@RequestMapping(path="/registerUser", method=RequestMethod.POST)
-	public ModelAndView registerUser(@Valid @ModelAttribute("user")User user, BindingResult result)
+	public ModelAndView registerUser(@Valid @ModelAttribute("user")User user, BindingResult validate)
 	{
-		
-		//Validate the form
-		if(result.hasErrors())
+		// Validate the form, if errors return view
+		if(validate.hasErrors())
 		{
 			return new ModelAndView("registerUser", "user", user);
 		}
 		
-		//Test the UserService Depecency Injection Instance
-		service.test();
+		// Calls UserBusinessService.create()
+		boolean result = this.userService.create(user);
 		
-		//Return MAV and user model to login form
+		// If create failed return with error
+		if(result == false)
+		{
+			ModelAndView mv = new ModelAndView("registerUser");
+			mv.addObject("user", user);
+			mv.addObject("error", "Username already exists. Please try another.");
+			return mv;
+		}
+		
+		// Return MAV and user model to login form
 		return new ModelAndView("loginUser", "user", user);
 	}
 	

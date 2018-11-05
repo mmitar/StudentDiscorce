@@ -12,28 +12,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.app.business.CourseBusinessInterface;
 import com.app.business.UserBusinessInterface;
-import com.app.model.Course;
 import com.app.model.User;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController 
 {
+	/**
+	 * Dependency Injected
+	 */
+	@Autowired
 	private UserBusinessInterface userService;
+	
+	@Autowired
 	private CourseBusinessInterface courseService;
-	
-	@Autowired
-	public void setUserService(UserBusinessInterface userService)
-	{
-		this.userService = userService;
-	}
-	
-	@Autowired
-	public void setCourseService(CourseBusinessInterface courseService)
-	{
-		this.courseService = courseService;
-	}
-	
 	
 	/**
 	 * displayForm
@@ -66,8 +58,10 @@ public class LoginController
 			return new ModelAndView("loginUser", "user", user);
 		}
 		
+		// Call UserBusinessService.findBy() to see if user exists
 		User verifiedUser = this.userService.findBy(user);
 		
+		// check if the User was found. If not return back to previous view with error
 		if(verifiedUser == null)
 		{
 			ModelAndView mv = new ModelAndView("loginUser");
@@ -76,6 +70,7 @@ public class LoginController
 			return mv;
 		}
 		
+		// Forwards the user to the dashboard if User found
 		ModelAndView mv = new ModelAndView("dashboard");
 		mv.addObject("user", verifiedUser);
 		mv.addObject("courses", this.courseService.findAll());

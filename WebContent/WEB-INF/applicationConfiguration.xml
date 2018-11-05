@@ -34,14 +34,14 @@
     <!-- Derby Datasource -->
     <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
-        <property name="url" value="jdbc:derby:/Users/Matt/MySpringDB" />
+        <property name="url" value="jdbc:derby:/Users/Matt/MySpringDB"/>
         <property name="username" value="user" />
         <property name="password" value="derby" />
     </bean>
   
     <!-- Setup Transaction Manager -->
     <aop:config>
-        <aop:pointcut id="allServiceMethods" expression="execution(* com.gcu.business.*Interface.*(..))" />
+        <aop:pointcut id="allServiceMethods" expression="execution(* com.app.business.*Interface.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="allServiceMethods" />
     </aop:config>
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -69,15 +69,11 @@
 	
 	<!-- Business Services -->
 	<bean id="userService" class="com.app.business.UserBusinessService"
-			init-method="init" 
-			destroy-method="destroy"
 			scope="request">
 			
 			<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 	<bean id="courseService" class="com.app.business.CourseBusinessService"
-			init-method="init" 
-			destroy-method="destroy"
 			scope="request">
 			
 			<aop:scoped-proxy proxy-target-class="false" />
@@ -101,5 +97,5 @@
  	<bean id="userDataService" class="com.app.data.UserDataService">
 		<property name="dataSource" ref="dataSource" />
  	</bean>
-
+ 	
  </beans>

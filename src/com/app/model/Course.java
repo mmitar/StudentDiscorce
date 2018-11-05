@@ -19,26 +19,29 @@ public class Course
 	@Size(min=4, max=30, message="ID must be between 5 and 30 characters.")
 	private String courseID;
 	@NotNull(message="Title cannot be null.")
-	@Size(min=5, max=30, message="Title must be between 5 and 30 characters.")
+	@Size(min=5, max=200, message="Title must be between 5 and 30 characters.")
 	private String title;
 	@NotNull(message="description cannot be null.")
-	@Size(min=5, max=30, message="description must be between 5 and 30 characters.")
+	@Size(min=5, max=200, message="description must be between 5 and 30 characters.")
 	private String description;
 	@NotNull(message="Major cannot be null.")
-	@Size(min=5, max=30, message="Major must be between 5 and 30 characters.")
+	@Size(min=5, max=200, message="Major must be between 5 and 30 characters.")
 	private String major;
 	@NotNull(message="Class Location cannot be null.")
-	@Size(min=5, max=30, message="Class Location must be between 5 and 30 characters.")
+	@Size(min=5, max=200, message="Class Location must be between 5 and 30 characters.")
 	private String classLocation;
 	@NotNull(message="Class Times cannot be null.")
-	@Size(min=5, max=30, message="Class Times must be between 5 and 30 characters.")
+	@Size(min=5, max=200, message="Class Times must be between 5 and 30 characters.")
 	private String classTimes;
 	@NotNull(message="Tutor Times cannot be null.")
-	@Size(min=5, max=30, message="Tutor Times must be between 5 and 30 characters.")
+	@Size(min=5, max=200, message="Tutor Times must be between 5 and 30 characters.")
 	private String tutorTimes;
+	
 	private List<User> instructors;
 	private List<User> tutors;
 	private List<User> students;
+	
+	@Size(max=500, message="Image URL length cannot be longer than 500 characters.")
 	private String image;
 
 	public Course() 
@@ -189,14 +192,14 @@ public class Course
 	
 	public static String getSqlParams()
 	{
-		return 	  "`COURSE_ID`, "
-				+ "`TITLE`, "
-				+ "`DESCRIPTION`, "
-				+ "`MAJOR`, "
-				+ "`CLASS_LOCATION`, "
-				+ "`CLASS_TIMES`, "
-				+ "`TUTOR_TIMES`, "
-				+ "`IMAGE`";
+		return 	  "COURSE_ID, "
+				+ "TITLE, "
+				+ "DESCRIPTION, "
+				+ "MAJOR, "
+				+ "CLASS_LOCATION, "
+				+ "CLASS_TIMES, "
+				+ "TUTOR_TIMES, "
+				+ "IMAGE";
 	}
 	
 	public static String getSqlValues(Course course)
@@ -207,7 +210,7 @@ public class Course
 				"'" + course.getMajor() + "', " +
 				"'" + course.getClassLocation() + "', " +
 				"'" + course.getClassTimes() + "', " +
-				"'" + course.getTutorTimes() + "'" +
+				"'" + course.getTutorTimes() + "', " +
 				"'" + course.getImage() + "'";
 	}
 }

@@ -13,7 +13,7 @@
 			<img src="<c:url value="${course.image}"/>" alt="Picture" width="500px" height="200px">
 						
 			<div class="course--id">
-				${course.id}
+				${course.courseID}
 				${course.title}
 			</div>
 			<div class="course--major">

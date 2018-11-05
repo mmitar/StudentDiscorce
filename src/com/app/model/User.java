@@ -1,7 +1,5 @@
 package com.app.model;
 
-import java.sql.ResultSet;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -144,13 +142,13 @@ public class User
 	
 	public static String getSqlParams()
 	{
-		return 	  "`USERNAME`, "
-				+ "`PASSWORD`, "
-				+ "`FIRSTNAME`, "
-				+ "`LASTNAME`, "
-				+ "`EMAIL`, "
-				+ "`PHONE`, "
-				+ "`PERMISSION`";
+		return 	  "USERNAME, "
+				+ "PASSWORD, "
+				+ "FIRSTNAME, "
+				+ "LASTNAME, "
+				+ "EMAIL, "
+				+ "PHONE, "
+				+ "PERMISSION";
 	}
 	
 	public static String getSqlValues(User user)

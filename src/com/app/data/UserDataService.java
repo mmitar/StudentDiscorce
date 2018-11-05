@@ -1,50 +1,45 @@
 package com.app.data;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.app.model.User;
 
-@Named("userData")
 public class UserDataService implements DataAccessInterface<User>{
 
+	/**
+	 * Spring JDBC Dependency Setter Injection
+	 */
 	private JdbcTemplate jdbcTemplateObject;
 	
+	@Autowired
 	public void setDataSource(DataSource dataSource)
 	{
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
+	/**
+	 * Default Constructor
+	 */
 	public UserDataService() {}
-	
-	@Override
-	public List<User> findAll() 
-	{
-		return null;
-	}
-	
-	@Override 
-	public List<User> findAll(User user)
-	{
-		return null;
-	}
-	
+
+	/**
+	 * READ Method
+	 * Validation Login query checks if username exists in the database.
+	 * 
+	 * @param User user
+	 * @return User user || null
+	 */
 	@Override
 	public User findBy(User user)
 	{
 		// READ query to identify the user by username and password
-		String sql = "SELECT * FROM `studisc.users` WHERE `USERNAME` = '"+user.getUsername()+"' AND `PASSWORD` = '"+user.getPassword()+"'";
+		String sql = "SELECT * FROM studisc.users WHERE USERNAME = '"+user.getUsername()+"' AND PASSWORD = '"+user.getPassword()+"'";
 		try
 		{
 			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
@@ -67,30 +62,32 @@ public class UserDataService implements DataAccessInterface<User>{
 			e.printStackTrace();
 		}
 		
+		// Returns null if Exception is thrown
 		return null;
 	}
 
-	@Override
-	public User findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/**
+	 * CREATE Method
+	 * Checks first whether username already exists. If not add to DB.
+	 * 
+	 * @param User user
+	 * @return boolean
+	 */
 	@Override
 	public boolean create(User user) 
 	{
 		// READ query to see if username is already taken
-		String sql_1 = "SELECT * FROM `studisc.users` WHERE `USERNAME` = '"+user.getUsername()+"'";
-		int rows_1 = jdbcTemplateObject.update(sql_1);
+		String sql_1 = "SELECT * FROM studisc.users WHERE USERNAME = '"+user.getUsername()+"'";
+		SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql_1);
 		
-		// Return if it is
-		if(rows_1 > 0)
+		// If first Row exists, the username is taken.
+		if(srs.next())
 		{
 			return false;
 		}
 		
 		// Create query that adds the user to the DB
-		String sql = "INSERT INTO `studisc.users` (" + User.getSqlParams() + ") VALUES (" + User.getSqlValues(user) + ")";
+		String sql = "INSERT INTO studisc.users (" + User.getSqlParams() + ") VALUES (" + User.getSqlValues(user) + ")";
 		try
 		{
 			// Execute SQL Insert
@@ -103,6 +100,8 @@ public class UserDataService implements DataAccessInterface<User>{
 		{
 			e.printStackTrace();
 		}
+		
+		// Returns false if Exception is thrown
 		return false;
 	}
 
@@ -117,5 +116,22 @@ public class UserDataService implements DataAccessInterface<User>{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public User findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
+	@Override
+	public List<User> findAll() 
+	{
+		return null;
+	}
+	
+	@Override 
+	public List<User> findAll(User user)
+	{
+		return null;
+	}
 }
