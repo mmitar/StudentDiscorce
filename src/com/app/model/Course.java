@@ -3,13 +3,6 @@ package com.app.model;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-=======
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -20,31 +13,10 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
  * @author Matt & Joey
  *
  */
->>>>>>> mattsbranch
 public class Course 
 {
 	@NotNull(message="ID cannot be null.")
 	@Size(min=4, max=30, message="ID must be between 5 and 30 characters.")
-<<<<<<< HEAD
-	private String id;
-	@NotNull(message="Title cannot be null.")
-	@Size(min=5, max=30, message="Title must be between 5 and 30 characters.")
-	private String title;
-	@NotNull(message="description cannot be null.")
-	@Size(min=5, max=30, message="description must be between 5 and 30 characters.")
-	private String description;
-	@NotNull(message="Major cannot be null.")
-	@Size(min=5, max=30, message="Major must be between 5 and 30 characters.")
-	private String major;
-	@NotNull(message="Class Location cannot be null.")
-	@Size(min=5, max=30, message="Class Location must be between 5 and 30 characters.")
-	private String classLocation;
-	@NotNull(message="Class Times cannot be null.")
-	@Size(min=5, max=30, message="Class Times must be between 5 and 30 characters.")
-	private String classTimes;
-	@NotNull(message="Tutor Times cannot be null.")
-	@Size(min=5, max=30, message="Tutor Times must be between 5 and 30 characters.")
-=======
 	private String courseID;
 	@NotNull(message="Title cannot be null.")
 	@Size(min=5, max=200, message="Title must be between 5 and 200 characters.")
@@ -63,7 +35,6 @@ public class Course
 	private String classTimes;
 	@NotNull(message="Tutor Times cannot be null.")
 	@Size(min=5, max=200, message="Tutor Times must be between 5 and 200 characters.")
->>>>>>> mattsbranch
 	private String tutorTimes;
 	
 	private List<User> instructors;

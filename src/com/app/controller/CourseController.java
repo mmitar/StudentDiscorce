@@ -58,25 +58,7 @@ public class CourseController
 		
 		return mv;
 	}
-<<<<<<< HEAD
-	@RequestMapping(path="/addedCourse", method=RequestMethod.POST)
-	public ModelAndView addCourse(@Valid @ModelAttribute("course")Course course, BindingResult result)
-	{		
-		//Validate the form
-		if(result.hasErrors())
-		{
-			return new ModelAndView("addCourse", "course", course);
-		}		
-		service.test();
-		
-		return new ModelAndView("addedCourse", "course", course);
-	}
-	
-	@RequestMapping(path="/addCourse", method=RequestMethod.GET)
-	public ModelAndView displayForm1()
-	{
-=======
-	
+
 	/**
 	 * addCourse
 	 * Checks the validation of course in the addCourse form. 
@@ -123,7 +105,6 @@ public class CourseController
 	public ModelAndView addNewCourse()
 	{
 		//return MAV to addCourse
->>>>>>> mattsbranch
 		return new ModelAndView("addCourse", "course", new Course());
 	}
 	
