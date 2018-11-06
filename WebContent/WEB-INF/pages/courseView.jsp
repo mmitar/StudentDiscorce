@@ -8,22 +8,29 @@
 
 	<div class="course--content">
 	
-	content ${course.id}
 		<div class="course--header">
 			
-			<img src="<c:url value="${course.image}"/>" alt="Picture" height="200px">
-			<img src="https://www.csuci.edu/img/launch-virtual-tour-16x9.jpg" alt="Picture" height="200px">
-			
+			<img src="<c:url value="${course.image}"/>" alt="Picture" width="500px" height="200px">
+						
 			<div class="course--id">
-				${course.id}
+				${course.courseID}
+				${course.title}
 			</div>
 			<div class="course--major">
-				${couse.major}
+				${course.major}
 			</div>
 		</div>
 		<div class="course--time">
-			time start
+		<h4>Class Information:</h4>
+			Room: ${course.classLocation}, Time: ${course.classTimes}
 		
+		<h4>Tutoring Information:</h4>
+			Room: ${course.classLocation}, Time: ${course.tutorTimes}
+		</div>
+		
+		<div class="course--description">
+			<h4>Description:</h4>
+			${course.description}
 		</div>
 		
 	</div>
@@ -32,14 +39,21 @@
 		
 		<h3>Instructors:</h3>
 		<hr/>
-		<br/>Tim<br/>
-		<br>
+		<c:forEach items="${course.instructors}" var="instructor">
+			${instructor.lastName}, ${instructor.firstName}<br/>
+		</c:forEach>
+		
 		<h3>Tutors:</h3>
 		<hr/>
-		<br/>Tom<br/>
+		<c:forEach items="${course.tutors}" var="tutor">
+			${tutor.lastName}, ${tutor.firstName}<br/>
+		</c:forEach>
+		
 		<h3>Students:</h3>
 		<hr/>
-		<br>Tam<br/>
+		<c:forEach items="${course.students}" var="student">
+			${student.lastName}, ${student.firstName}<br/>
+		</c:forEach>
 		
 	</div>
 

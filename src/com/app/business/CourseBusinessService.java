@@ -1,75 +1,69 @@
 package com.app.business;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.app.data.DataAccessInterface;
 import com.app.model.Course;
 
 public class CourseBusinessService implements CourseBusinessInterface
 {
-//	UserBusinessService service;
+	/**
+	 * Dependency Injected
+	 */
+	@Autowired
+	private DataAccessInterface<Course> courseDAO;
 	
-	List<Course> courses = new ArrayList<Course>();
+	/**
+	 * Default Constructor
+	 */
+	public CourseBusinessService() {}
 	
-	public CourseBusinessService() 
+	/**
+	 * Forwards the request to the course persistence layer.
+	 * 
+	 * @param Course course
+	 * @return Course
+	 */
+	public Course findBy(Course course)
 	{
-		courses.add(new Course("CST-341",
-				"Open Source Computing",
-				"Develop a Spring Application",
-				"Software Development",
-				"16-104",
-				"1:00-2:45pm||Tu,We,Th",
-				"3:00-5:00pm||Tu,We,Th",
-//				service.getInstructors(),service.getTutors(),service.getStudents(),
-				null,null,null,
-				"https://www.csuci.edu/img/launch-virtual-tour-16x9.jpg"));
-		courses.add(new Course("CST-326",
-				"Written and Verbal Communication",
-				"Integrating Team Mangement Skills with Project Development",
-				"Liberal Arts",
-				"4-224",
-				"3:00-4:45pm||Tu,We,Th",
-				"5:00-7:00pm||Tu,We,Th",
-//				service.getInstructors(),service.getTutors(),service.getStudents(),
-				null,null,null,
-				"https://www.rider.edu/sites/default/files/styles/hero_image_-_no_play_icon/public/featuredimages/111114_campus_112_0.jpg?itok=7hDr78hX"));
-		courses.add(new Course("BUS-352",
-				"Business Statistics",
-				"Calculate, Assume, and Gentrify Economic Anomalies",
-				"Software Development",
-				"20-401",
-				"8:00-9:00pm||Tu,We,Th",
-				"5:00-6:00pm||Tu,We,Th",
-//				service.getInstructors(),service.getTutors(),service.getStudents(),
-				null,null,null,
-				"https://uwm.edu/wp-content/uploads/2017/07/downer-cluster-900X500.jpg"));
+		// Returns results from CourseDataService.findBy(course)
+		return this.courseDAO.findBy(course);
 	}
 	
-	public Course oneCourse() {
-	
-		Course one = courses.get(1);
-		return one;
-	}
-	
-	public List<Course> getCourses() 
+	/**
+	 * Forwards the requests to the course persistence layer
+	 * 
+	 * @param Course course
+	 * @return List<Course>
+	 */
+	public List<Course> findAll(Course course)
 	{
-		return courses;
+		// Returns results from CourseDataService.findAll(course)
+		return this.courseDAO.findAll(course);
 	}
 	
-	public void init() {
-		System.out.println("init() from CourseBusinessService");
+	/**
+	 * Forwards the request to the course persistence layer.
+	 * 
+	 * @return List<Course>
+	 */
+	public List<Course> findAll()
+	{
+		// Returns results from CourseDataService.findAll()
+		return this.courseDAO.findAll();
 	}
 	
-	public void destroy() {
-		System.out.println("destroy() from CourseBusinessService");
-	}
-	
-	@Override
-	public void test() {
-		System.out.println("Hello from CourseBusinessService.");
+	/**
+	 * Forwards the request to the course persistence layer
+	 * 
+	 * @param Course course
+	 * @return boolean
+	 */
+	public boolean createCourse(Course course) 
+	{
+		// Return results from CourseDataService.create(course)
+		return this.courseDAO.create(course);
 	}
 }

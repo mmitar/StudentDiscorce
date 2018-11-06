@@ -18,13 +18,11 @@ import com.app.model.User;
 @RequestMapping("/course")
 public class CourseController
 {
-	private CourseBusinessInterface service;
-	
+	/**
+	 * Dependency Injected
+	 */
 	@Autowired
-	public void setCourseService(CourseBusinessInterface service)
-	{
-		this.service = service;
-	}
+	private CourseBusinessInterface courseService;
 	
 	/**
 	 * displayForm
@@ -36,23 +34,31 @@ public class CourseController
 	@RequestMapping(path="/new", method=RequestMethod.GET)
 	public ModelAndView displayForm()
 	{
-		service.test();
-		
+		//Return new MAV
 		return new ModelAndView("courseList");
 	}
 	
+	/**
+	 * displayCourse
+	 * Collects from a form post the course Id and get the course information and passes
+	 * it to the course view where all the data is populated.
+	 * 
+	 * @param course
+	 * @return ModelAndView course, courseView
+	 */
 	@RequestMapping(path="/courseView", method=RequestMethod.POST)
 	public ModelAndView displayCourse(@ModelAttribute("course")Course course) {
+
+		// Connects to the CourseBusinessService to get Course by ID
+		course = courseService.findBy(course);
 		
-		System.out.println("init courseview");
-//		System.out.println(course);
-//		System.out.println(course.getId());
-		
+		// Construct MAV
 		ModelAndView mv = new ModelAndView("courseView");
 		mv.addObject("course", course);
 		
 		return mv;
 	}
+<<<<<<< HEAD
 	@RequestMapping(path="/addedCourse", method=RequestMethod.POST)
 	public ModelAndView addCourse(@Valid @ModelAttribute("course")Course course, BindingResult result)
 	{		
@@ -69,6 +75,55 @@ public class CourseController
 	@RequestMapping(path="/addCourse", method=RequestMethod.GET)
 	public ModelAndView displayForm1()
 	{
+=======
+	
+	/**
+	 * addCourse
+	 * Checks the validation of course in the addCourse form. 
+	 * Navs to the course view page if the model is valid and original
+	 * 
+	 * @param course
+	 * @param result
+	 * @return ModelAndView
+	 */
+	@RequestMapping(path="/addedCourse", method=RequestMethod.POST)
+	public ModelAndView addCourse(@Valid @ModelAttribute("course")Course course, BindingResult validate)
+	{		
+		// Validate the form
+		if(validate.hasErrors())
+		{
+			// Return Previous MAV
+			return new ModelAndView("addCourse", "course", course);
+		}
+		
+		// Calls CourseBusinessService.createCourse() to add new Course
+		boolean result = courseService.createCourse(course);
+		
+		// Verifies if creating a course worked. If false, course already exists.
+		if(result == false) 
+		{
+			// Return Previous MAV w/ Error
+			ModelAndView mv = new ModelAndView("addCourse");
+			mv.addObject("course", course);
+			mv.addObject("error", "Course ID already exists.");
+			return mv;
+		}
+		
+		// Forward user to the course View of new class.
+		return new ModelAndView("courseView", "course", course);
+	}
+	
+	/**
+	 * addNewCourse
+	 * Navigates the user to a new add course page
+	 * 
+	 * @return ModelAndView addCourse.jsp
+	 */
+	@RequestMapping(path="/addCourse", method=RequestMethod.GET)
+	public ModelAndView addNewCourse()
+	{
+		//return MAV to addCourse
+>>>>>>> mattsbranch
 		return new ModelAndView("addCourse", "course", new Course());
 	}
 	

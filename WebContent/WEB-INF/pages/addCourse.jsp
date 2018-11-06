@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<<<<<<< HEAD
 
 
 <body>
@@ -17,46 +18,102 @@
 			</tr>
 			<tr>
 				<td><form:input class="input" path="title" placeholder="Class Title" minlength="5" maxlength="30" required="true" /></td>
+=======
+ <body>
+	<div class="center--body">
+	<h2>Add Course</h2>
+	<br/>
+	<form:form method="POST" modelAttribute="course" action="../course/addedCourse">
+		<table>
+			<tr>
+				<td><form:input class="input" path="courseID" placeholder="Course ID" minlength="1" maxlength="30" required="true" /></td>
+			</tr>
+			<tr>
+				<td><form:errors class="error" path="courseID"/></td>
+			</tr>
+			<tr>
+				<td><form:input class="input" path="title" placeholder="Course Title" minlength="5" maxlength="200" required="true" /></td>
+>>>>>>> mattsbranch
 			</tr>
 			<tr>
 				<td><form:errors class="error" path="title"/></td>
 			</tr>
 			<tr>
+<<<<<<< HEAD
 				<td><form:input class="input" path="description" placeholder="Description" minlength="5" maxlength="100" required="true" /></td>
+=======
+				<td><form:input class="input" path="description" placeholder="Description" minlength="5" maxlength="200" required="true" /></td>
+>>>>>>> mattsbranch
 			</tr>
 			<tr>
 				<td><form:errors class="error" path="description"/></td>
 			</tr>
 			<tr>
+<<<<<<< HEAD
 				<td><form:input class="input" path="major" placeholder="Major" maxlength="14" required="true" /></td>
+=======
+				<td><form:input class="input" path="major" placeholder="Major" maxlength="200" required="true" /></td>
+>>>>>>> mattsbranch
 			</tr>
 			<tr>
 				<td><form:errors class="error" path="major"/></td>
 			</tr>
 			<tr>
+<<<<<<< HEAD
 				<td><form:input class="input" path="classLocation" placeholder="Class Location" maxlength="30" required="true" /></td>
+=======
+				<td><form:input class="input" path="classLocation" placeholder="Class Location" maxlength="200" required="true" /></td>
+>>>>>>> mattsbranch
 			</tr>
 			<tr>
 				<td><form:errors class="error" path="classLocation"/></td>
 			</tr>
 			<tr>
+<<<<<<< HEAD
 				<td><form:input class="input"  path="classTimes" placeholder="password" maxlength="30" required="true" /></td>
+=======
+				<td><form:input class="input"  path="classTimes" placeholder="Class Times" maxlength="200" required="true" /></td>
+>>>>>>> mattsbranch
 			</tr>
 			<tr>
 				<td><form:errors class="error" path="classTimes"/></td>
 			</tr>
 			<tr>
+<<<<<<< HEAD
 				<td><form:input class="input"  path="tutorTimes" placeholder="password" maxlength="30" required="true" /></td>
+=======
+				<td><form:input class="input"  path="tutorTimes" placeholder="Tutor Times" maxlength="200" required="true" /></td>
+>>>>>>> mattsbranch
 			</tr>
 			<tr>
 				<td><form:errors class="error" path="tutorTimes"/></td>
 			</tr>
+<<<<<<< HEAD
 			
 			<tr> 
 				<td><input type="submit" value="Add Course"/></td>
+=======
+			<tr>
+				<td><form:input class="input"  path="image" placeholder="Image URL (https://...)" maxlength="500" required="false" /></td>
+			</tr>
+			<tr>
+				<td><form:errors class="error" path="image"/></td>
+			</tr>
+			
+			<tr> 
+				<td><input type="submit" value="Add Course"/></td>
+				
+>>>>>>> mattsbranch
 				<td><a href="../login/user">Login</a></td>
 			</tr>
 		</table>
 	</form:form>
+<<<<<<< HEAD
 </div>
 </body>
+=======
+	
+	<div style="color: red">${error}</div>
+</div>
+</body> 
+>>>>>>> mattsbranch

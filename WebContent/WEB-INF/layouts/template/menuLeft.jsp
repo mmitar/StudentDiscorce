@@ -26,8 +26,8 @@
 
 <div class="channels">
 	
-	<div class="channel placeholder">CST-341</div>
-	<div class="channel placeholder">HTR-533</div>
+	<div class="channel placeholder"></div>
+	<div class="channel placeholder"></div>
 	<div class="channel placeholder"></div>
 	
 	<div class="channel placeholder"></div>
@@ -91,9 +91,9 @@
 		    			<div class="channel" style="background: url(${course.image}) no-repeat fixed center">
 		    				<form:form id="${courseFormId}" method="POST" modelAttribute="course" action="../course/courseView">
 		    				
-								<input type="hidden" name="id" value="${course.id}"/>
+								<input type="hidden" name="courseID" value="${course.courseID}"/>
 								
-			    				<input class="channel--input" type="submit" value="${course.id}"/>
+			    				<input class="channel--input" type="submit" value="${course.courseID}"/>
 							
 							</form:form>
 								</div>

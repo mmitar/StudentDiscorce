@@ -49,5 +49,6 @@
 			</tr>
 		</table>
 	</form:form>
+	<div style="color: red">${error}</div>
 </div>
 </body>
