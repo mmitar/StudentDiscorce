@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.app.business.CourseBusinessInterface;
 import com.app.model.Course;
-import com.app.model.User;
 
 @Controller
 @RequestMapping("/course")
